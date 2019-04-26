@@ -2,11 +2,34 @@ version: "3"
 
 services:
   tea_api: 
+    container_name: tea_api
     build: .
     ports: 
       - 3030:3030
     volumes: 
-      - .:/app
+      - ./app:/app
     stdin_open: true
     environment: 
-      - port=3030
+      APP_PORT: 3030
+      MONGO_URL: mongodb://mongodb:27017
+      MONGO_DB: teas
+      MONGO_COL: tea_list
+  #####
+  # MongoDB
+  #####
+  
+  mongodb:
+    container_name: mongodb
+    hostname : mongodb
+    image: 'mongo:4.1'
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+networks: 
+  default:
+    driver: bridge
+
+volumes: 
+  mongodb_data:
