@@ -1,10 +1,45 @@
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
-  name: tea-api-pod
+  name: tea-api
+  labels:
+    name: tea-api
 spec:
-  containers:
-    - name: tea-api
-      image: neitofr/tea_api:beta
-      ports:
-      - containerPort: 5000
+  type: LoadBalancer
+  ports:
+    - port: 3030
+      targetPort: 3030
+      protocol: TCP
+  selector:
+    name: tea-api
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: tea-api
+  name: tea-api-ctrl
+spec:
+  replicas: 3
+  selector:
+    name: tea-api
+  template:
+    metadata:
+      labels:
+        name: tea-api
+    spec:
+      containers:
+        - image: neitofr/tea-api:beta
+          name: tea-api
+          env:
+          - name: APP_PORT
+            value: "3030"
+          - name: MONGO_URL
+            value: mongodb://mongo:27017
+          - name: MONGO_DB
+            value: teas
+          - name: MONGO_COL
+            value: tea_list
+          ports:
+          - containerPort: 3030
+            name: tea-api-server
