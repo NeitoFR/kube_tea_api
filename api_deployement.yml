@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tea_api_pod
+spec:
+  containers:
+    - name: tea_api
+      image: neitofr/tea_api:beta
+      ports:
+      - containerPort: 5000
