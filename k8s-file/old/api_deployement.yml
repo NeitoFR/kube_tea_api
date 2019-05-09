@@ -1,19 +1,4 @@
 apiVersion: v1
-kind: Service
-metadata:
-  name: tea-api
-  labels:
-    name: tea-api
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 3030
-      targetPort: 3030
-      protocol: TCP
-  selector:
-    name: tea-api
----
-apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
@@ -43,3 +28,18 @@ spec:
           ports:
           - containerPort: 3030
             name: tea-api-server
+---            
+apiVersion: v1
+kind: Service
+metadata:
+  name: tea-api
+  labels:
+    name: tea-api
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3030
+      targetPort: 3030
+      protocol: TCP
+  selector:
+    name: tea-api
