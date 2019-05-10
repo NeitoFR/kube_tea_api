@@ -2,7 +2,7 @@ FROM node:8.11.4
 
 ADD ./app /app
 
-EXPOSE 5000
+EXPOSE 3030
 
 WORKDIR /app
 

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: tea-api
-        image: neitofr/tea_api:0.0.1-alpha
+        image: neitofr/tea_api:auto
         env:
           - name: APP_PORT
             value: "3030"
@@ -41,6 +41,6 @@ spec:
   selector:
     app: tea-api
   ports:
-  - port: 3000
+  - port: 3030
     targetPort: tea-api
     protocol: TCP
