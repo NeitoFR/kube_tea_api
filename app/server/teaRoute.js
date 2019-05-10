@@ -7,7 +7,7 @@ const app = require("express").Router(),
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
 app.get("/teas", (req, res) => {
   console.log("Got request on ", req.url);
@@ -40,7 +40,7 @@ app.post("/teas", (req, res) => {
   switch (req.body.order) {
     case "add":
       mongoHelper
-        ._addTea(req.body)
+        ._addTea(req.body.tea)
         .then(result => {
           res.send({ res: "POST Route of Tea API", data: result }).end();
         })

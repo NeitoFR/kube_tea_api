@@ -3,9 +3,9 @@ const mdb = require("mongodb"),
 
 var con = null;
 
-const MONGO_URL = process.env.MONGO_URL,
-  MONGO_DB = process.env.MONGO_DB,
-  MONGO_COL = process.env.MONGO_COL;
+const MONGO_URL = "mongodb://mongo:27017",
+  MONGO_DB = "teas",
+  MONGO_COL = "tea_list";
 
 module.exports = {
   _initMongoDBConnection: cb => {
