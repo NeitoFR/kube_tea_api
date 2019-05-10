@@ -15,6 +15,7 @@ spec:
       containers:
       - name: tea-api
         image: neitofr/tea_api:auto
+        imagePullPolicy: Always
         env:
           - name: APP_PORT
             value: "3030"

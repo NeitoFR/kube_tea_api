@@ -50,11 +50,14 @@ app.post("/teas", (req, res) => {
       break;
 
     case "delete":
-      mongoHelper._deleteTea(req.body.key, req.body.value).then(result => {
-        res.send({ res: "POST Route of Tea API", data: result }).end();
-      }).catch(error => {
-        res.send({ res: "ERROR Deleting Tea", error: error }).end();
-      });
+      mongoHelper
+        ._deleteTea(req.body.key, req.body.value)
+        .then(result => {
+          res.send({ res: "POST Route of Tea API", data: result }).end();
+        })
+        .catch(error => {
+          res.send({ res: "ERROR Deleting Tea", error: error }).end();
+        });
       break;
 
     default:
@@ -72,6 +75,29 @@ app.get("/fill", (req, res) => {
     })
     .catch(error => {
       res.send({ res: "ERROR while filling with mock data", error: error });
+    });
+});
+
+app.get("*", (req, res) => {
+  res.send({
+    availableRoute: [
+      {
+        method: "GET",
+        route: "/fill",
+        explain: "Fill the mongodb with mock data"
+      },
+      {
+        method: "GET",
+        route: "/teas",
+        explain: ""
+      },
+      {
+        method: "POST",
+        route: "/teas",
+        explain: "Need a body with an order key equal to add or delete"
+      }
+    ]
   });
-})
+});
+
 module.exports = app;
