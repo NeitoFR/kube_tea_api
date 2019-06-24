@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: tea-api
-        image: neitofr/tea_api:auto
+        image: neitofr/tea_api:v1
         imagePullPolicy: Always
         env:
           - name: APP_PORT
