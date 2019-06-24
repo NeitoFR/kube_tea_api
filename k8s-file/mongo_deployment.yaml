@@ -31,7 +31,7 @@ metadata:
     name: mongo
   name: mongo
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: mongo
   ports:

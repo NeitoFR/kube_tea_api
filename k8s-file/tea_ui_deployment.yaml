@@ -18,6 +18,7 @@ spec:
           - name: PROD_SERVER_PORT
             value: "80"
         image: neitofr/tea_ui:latest
+        imagePullPolicy: Always
         resources:
           limits:
             memory: "128Mi"
